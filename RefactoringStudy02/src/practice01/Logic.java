@@ -37,35 +37,35 @@ public class Logic {
 	private void printCapitalCity(Country c)
 	{
 		System.out.println("Captitals are:");
-		for (int i = 0; i < 50; i++) {
-			Prefecture p = c.getPrefecture(i);
-
-			if (p != null) {
-				for (int j = 0; j < 100; j++) {
-					City ci = p.getCity(j);
-					if (ci != null) {
-						if (ci.getIsCapital()) {
-							System.out.println(ci.getName());
-						}
-					}
-				}
-			}
-		}
-		System.out.println("----");
+		printCityName(c,1);
 	}
 
 	private void printBigCity(Country c)
 	{
 		System.out.println("Big cities are:");
-		for (int i = 0; i < 50; i++) {
-			Prefecture p = c.getPrefecture(i);
+		printCityName(c,2);
+	}
 
-			if (p != null) {
+	private void printCityName(Country country,int mode)
+	{
+		for (int i = 0; i < 50; i++) {
+			Prefecture prefecture = country.getPrefecture(i);
+
+			if (prefecture != null) {
 				for (int j = 0; j < 100; j++) {
-					City ci = p.getCity(j);
-					if (ci != null) {
-						if (ci.getPopularity() > 10000) {
-							System.out.println(ci.getName());
+					City city = prefecture.getCity(j);
+					if (city != null) {
+						switch(mode) {
+						case 1:
+							if (city.getIsCapital()) {
+								System.out.println(city.getName());
+							}
+							break;
+						case 2:
+							if (city.getPopularity() > 10000) {
+								System.out.println(city.getName());
+							}
+							break;
 						}
 					}
 				}
